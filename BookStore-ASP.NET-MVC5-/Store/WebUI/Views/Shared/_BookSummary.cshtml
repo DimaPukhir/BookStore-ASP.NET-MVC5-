@@ -1,0 +1,41 @@
+﻿@model Domain.Entities.Book
+<div>
+    <div>
+        <div>
+            <h3>
+            <strong>@Model.Name</strong>
+            </h3>
+            <h3>
+            <strong>@Model.Author</strong>
+            </h3>
+          
+
+            <div>
+                <h4>@Model.Price.ToString("#USD")</h4>
+
+
+               @using (Html.BeginForm("AddToCart", "Cart")) {
+
+                   <div class="pull">
+
+                       @Html.HiddenFor(m=>m.BookId)
+                       @Html.Hidden("returnUrl",Request.Url.PathAndQuery)
+                       <input type="submit" value="Add to Cart" class="btn btn-success"/>
+                   </div>
+
+
+
+
+
+
+               }
+            </div>
+        </div>
+      
+    </div>
+    <span>@Model.Description</span>
+</div>
+<hr />
+
+
+

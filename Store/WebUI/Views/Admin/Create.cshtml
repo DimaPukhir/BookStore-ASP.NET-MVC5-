@@ -1,0 +1,55 @@
+﻿@model Domain.Entities.Book
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Create new book</h3>
+    </div>
+    @using (Html.BeginForm())
+    {
+
+        <div class="panel-body">
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                if (property.PropertyName != "BookId")
+                {
+
+                    <div class="form-group">
+
+                        <label>@(property.DisplayName ?? property.PropertyName)</label>
+                        @if (property.PropertyName == "Description")
+                        {
+                            @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
+
+
+                        }
+                        else
+                        { 
+                            @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                    
+                        }
+                        @Html.ValidationMessage(property.PropertyName)
+                    </div>
+
+
+                }
+
+
+            }
+
+
+        </div>
+
+
+
+
+
+        <div class="panel panel-footer">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-danger" })
+        </div>
+    }
+</div>
